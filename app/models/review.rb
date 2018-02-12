@@ -1,4 +1,6 @@
 class Review < ApplicationRecord
   belongs_to :lease
-  belongs_to :property_manager
+  
+
+  validates :rating, presence: true
 end

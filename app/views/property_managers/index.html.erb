@@ -1,0 +1,7 @@
+<h1>Property Managers</h1>
+
+<ul>
+  <% @property_managers.each do |manager| %>
+    <li><%= link_to manager.name, property_manager_path(manager) %></li>
+  <% end %>
+</ul>

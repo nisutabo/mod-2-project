@@ -1,0 +1,9 @@
+<h1><%= @property_manager.name %></h1>
+
+<ul>
+  <% @property_manager.buildings.each do |building| %>
+    <li><%= building.address %>, <%= building.borough %></li>
+  <% end %>
+</ul>
+
+<h3>Average Rating: <%= @property_manager.average_rating %></h3>

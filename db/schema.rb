@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209212019) do
+ActiveRecord::Schema.define(version: 20180212205506) do
 
   create_table "buildings", force: :cascade do |t|
     t.string "address"
@@ -22,10 +22,11 @@ ActiveRecord::Schema.define(version: 20180209212019) do
 
   create_table "leases", force: :cascade do |t|
     t.integer "user_id"
-    t.string "property_manager_id"
     t.integer "rent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "building_id"
+    t.boolean "current"
   end
 
   create_table "property_managers", force: :cascade do |t|
@@ -35,7 +36,6 @@ ActiveRecord::Schema.define(version: 20180209212019) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "property_manager_id"
     t.integer "rating"
     t.string "content"
     t.datetime "created_at", null: false
@@ -45,10 +45,10 @@ ActiveRecord::Schema.define(version: 20180209212019) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.date "dob"
   end
 
 end

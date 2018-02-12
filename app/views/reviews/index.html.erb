@@ -1,0 +1,4 @@
+<%  @reviews.each do |review| %>
+
+<h3><%= "#{review.lease.get_property_manager} - #{review.rating.to_s}" %></h3>
+<% end %>
