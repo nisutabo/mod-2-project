@@ -1,15 +1,16 @@
 <h1>Welcome Back!</h1>
-<h2>Log In</h2>
 
 <% if flash[:message] %>
   <p><%= flash[:message] %></p>
 <% end %>
 
-
-<%= form_tag '/login' do %>
-<label for="Name">Name:</label><br>
-<%= text_field_tag :name %> <br>
-<label for="Password">Password:</label><br>
-<%= password_field_tag :password %><br>
-<%= submit_tag 'Login' %>
-<% end %>
+<div id="login-section" class="container">
+  <h2>Log In</h2>
+  <%= form_tag '/login' do %>
+  <label for="Name">Name:</label><br>
+  <%= text_field_tag :name %> <br>
+  <label for="Password">Password:</label><br>
+  <%= password_field_tag :password %><br>
+  <%= submit_tag 'Login' %>
+  <% end %>
+</div>
