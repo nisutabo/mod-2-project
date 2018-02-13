@@ -6,18 +6,54 @@
   <% end %>
 <% end %>
 
+<%= form_tag new_review_path, method: 'get' do  %>
+<%= label_tag :lease_id, "Choose a lease to write a review" %><br>
+<%= select_tag :lease_id, options_from_collection_for_select(@user.leases, :id, :property_manager_building, selected: params[:lease_id]), {include_blank: "Create new lease"}  %><br>
+<%= submit_tag %>
+<% end %>
+
+
 
 <%= form_for(@review) do |f| %><br>
+<% if params[:lease_id] == "" %>
 <%= f.label :property_manager_id, "Select or create new lease" %><br>
-<% if !@user.leases.empty? %>
-  <%= f.collection_select :lease_id, @user.leases, :id, :property_manager_building %><br>
-<% end %>
-  <%= f.fields_for :leases do |lease_form| %>
-    <%= lease_form.label :rent %>
-    <%= lease_form.text_field :rent %><br>
-    <%= lease_form.label :current, "Current lease?" %>
-    <%= lease_form.check_box :current %><br>
-  <% end %>
+  <%= f.fields_for :lease do |lease| %>
+    <%= lease.label :rent %><br>
+    <%= lease.text_field :rent %><br>
+    <%= lease.label :current, "Current lease?" %><br>
+    <%= lease.check_box :current %><br>
+    <%= lease.hidden_field :user_id, value: session[:user_id] %>
+    <%= lease.label :building %><br>
+    <%= lease.fields_for :building do |builder| %>
+      <%= builder.label :address %><br>
+      <%= builder.text_field :address, list: 'buildings_autocomplete' %><br>
+      <datalist id='buildings_autocomplete'>
+        <% Building.all.each do |building| %>
+        <option value="<%= building.address %>"></option>
+        <% end %>
+       </datalist>
+      <%= builder.label :borough %><br>
+      <%= builder.select :borough, ["Manhattan", "Queens", "Brooklyn", "Bronx", "Staten Island"] %><br>
+      <hr>
+      <%= builder.label :property_manager %><br>
+      <%= builder.fields_for :property_manager do |pm| %>
+        <%= pm.label :name %><br>
+        <%= pm.text_field :name, list: 'pm_autocomplete' %><br>
+        <datalist id='pm_autocomplete'>
+          <% PropertyManager.all.each do |pm| %>
+          <option value="<%= pm.name %>"></option>
+          <% end %>
+         </datalist>
+      <% end %>
+    <% end %>
+    <% end %>
+    <hr>
+  <% else %>
+      <%= f.hidden_field :lease_id, value: params[:lease_id] %>
+      <% end %>
+
+  <br>
+  <hr>
 <%= f.label :rating %><br>
 <%= f.select :rating, (0..10) %><br>
 <%= f.label :content, "Review" %><br>
