@@ -8,8 +8,16 @@
 
 
 <%= form_for(@review) do |f| %><br>
-<%= f.label :property_manager_id, "Property Manager" %><br>
-<%= f.collection_select :lease_id, @user.leases, :id, :property_manager_building %><br>
+<%= f.label :property_manager_id, "Select or create new lease" %><br>
+<% if !@user.leases.empty? %>
+  <%= f.collection_select :lease_id, @user.leases, :id, :property_manager_building %><br>
+<% end %>
+  <%= f.fields_for :leases do |lease_form| %>
+    <%= lease_form.label :rent %>
+    <%= lease_form.text_field :rent %><br>
+    <%= lease_form.label :current, "Current lease?" %>
+    <%= lease_form.check_box :current %><br>
+  <% end %>
 <%= f.label :rating %><br>
 <%= f.select :rating, (0..10) %><br>
 <%= f.label :content, "Review" %><br>
