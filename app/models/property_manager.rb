@@ -3,13 +3,26 @@ class PropertyManager < ApplicationRecord
   has_many :leases, through: :buildings
   has_many :reviews
 
-  def average_rating
+  def average(att)
     if self.reviews
-      ratings = self.reviews.map {|r| r.rating}
+      ratings = self.reviews.map {|r| r[att]}
       ratings.inject(:+) / ratings.size
     else
       "No reviews yet"
     end
+  end
+
+  def leases
+    self.buildings.map{|b| b.leases}.flatten
+  end
+
+  def average_rent
+    rents = self.leases.map{|l| l.rent}
+    rents.inject(:+) / rents.size
+  end
+
+  def overall
+    (self.average("niceness") + self.average("value") + self.average("accessibility") + self.average("response_time")) / 4.0
   end
 
   def reviews

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :reviews
   resources :leases
   resources :buildings
-  resources :property_managers
+  resources :property_managers do
+    resources :reviews, only: [:index]
+  end
   resources :users
 
 
