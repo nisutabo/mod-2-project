@@ -11,6 +11,5 @@ class Review < ApplicationRecord
     @building = Building.find_or_create_by(address:att[:building_attributes][:address])
     @building.update(borough:att[:building_attributes][:borough], property_manager_id:@property_manager.id)
     @lease = Lease.create(rent:att[:rent], current:att[:current], user_id:att[:user_id], building_id:@building.id)
-    byebug
   end
 end

@@ -20,9 +20,9 @@ class ReviewsController < ApplicationController
     @user = User.find(session[:user_id])
     @review = Review.new(review_params)
     @review.lease_id = Lease.last.id
-    byebug
+
     if @review.save
-      byebug
+
       redirect_to @review
     else
       render :new
@@ -30,6 +30,7 @@ class ReviewsController < ApplicationController
   end
 
   def show
+    @user = User.find(session[:user_id])
   end
 
   def edit
@@ -43,12 +44,19 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(session[:user_id])
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to user_path(@user)
+  end
+
 
 
   private
 
   def review_params
-    byebug
+
     if !params[:review][:lease_id]
       params.require(:review).permit(:rating, :content, lease_attributes: [:rent, :current, :user_id, building_attributes: [:address, :borough, property_manager_attributes: [:name]]])
     else

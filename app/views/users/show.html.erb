@@ -4,7 +4,7 @@
 <% if @user.current_lease %>
   <h2>Current Address: <%= @user.current_lease.building.address %></h2>
   <h2>Borough: <%= @user.current_lease.building.borough %></h2>
-  <h2>PropertyManager: <%= @user.property_manager.name %></h2>
+  <h2>Property Manager: <%= @user.property_manager.name %></h2>
 <% end %>
 
 <h3><%= link_to 'Write A Review', new_review_path %>  </h3>
@@ -13,7 +13,7 @@
 <h3>Past leases</h3>
 <ul>
   <% @user.leases.each do |lease| %>
-    <li><%= lease.property_manager_building %></li>
+    <li><%= link_to lease.property_manager_building, lease_path(lease) %></li>
   <% end %>
 </ul>
 
