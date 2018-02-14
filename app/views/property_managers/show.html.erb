@@ -1,4 +1,5 @@
-<h1><%= @property_manager.name %></h1>
+<h1><%= @property_manager.name %></h1><br>
+<h2>Average Monthly Rent: $<%= @property_manager.average_rent %></h2><br>
 
 <ul>
   <% @property_manager.buildings.each do |building| %>
@@ -6,4 +7,59 @@
   <% end %>
 </ul>
 
-<h3>Average Rating: <%= @property_manager.average_rating %></h3>
+<p>Number of Reviews: <%= @property_manager.reviews.size %></p>
+
+<h4>Average Ratings</h4>
+<% if @property_manager.reviews %>
+<table class="table">
+  <tr>
+    <th>Niceness</th>
+    <th>Value</th>
+    <th>Response Time</th>
+    <th>Accessibility</th>
+    <th>Overall</th>
+  </tr>
+  <tr>
+    <td><%= @property_manager.average("niceness") %></td>
+    <td><%= @property_manager.average("value") %></td>
+    <td><%= @property_manager.average("response_time") %></td>
+    <td><%= @property_manager.average("accessibility") %></td>
+    <td><%= @property_manager.overall %></td>
+  </tr>
+</table>
+
+
+  <h4>Best Review</h4>
+  <table class="table">
+    <tr>
+      <th>Rating</th>
+      <th>Review</th>
+      <th>Building</th>
+      <th>User Name</th>
+    </tr>
+    <tr>
+      <td><%= @property_manager.best_review.rating %></td>
+      <td><%= @property_manager.best_review.content %></td>
+      <td><%= @property_manager.best_review.lease.building.address %></td>
+      <td><%= @property_manager.best_review.lease.user.name %></td>
+    </tr>
+  </table>
+
+  <h4>Worst Review</h4>
+  <table class="table">
+    <tr>
+      <th>Rating</th>
+      <th>Review</th>
+      <th>Building</th>
+      <th>User Name</th>
+    </tr>
+    <tr>
+      <td><%= @property_manager.worst_review.rating %></td>
+      <td><%= @property_manager.worst_review.content %></td>
+      <td><%= @property_manager.worst_review.lease.building.address %></td>
+      <td><%= @property_manager.worst_review.lease.user.name %></td>
+    </tr>
+  </table>
+<% end %>
+
+<%= link_to "See All Reviews", property_manager_reviews_path(@property_manager) %>

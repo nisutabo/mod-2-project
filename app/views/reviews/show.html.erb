@@ -1,10 +1,25 @@
 <h1>Your Review</h1>
 
-<label> Rating: </label><br>
+<label> Niceness Rating: </label><br>
+<h2><%= @review.niceness %></h2>
+
+<label> Response Time Rating: </label><br>
+<h2><%= @review.response_time %></h2>
+
+<label> Accessibility Rating: </label><br>
+<h2><%= @review.accessibility %></h2>
+
+<label> Value: </label><br>
+<h2><%= @review.value %></h2>
+
+<label> Overall Rating: </label><br>
 <h2><%= @review.rating %></h2>
 
 <label> Review: </label>
 <h2><%= @review.content %></h2>
 
 <%= link_to 'Edit Review', edit_review_path %>
-<%= link_to 'Home Page', user_path %>
+<%= button_to 'Edit Review', @review, :method => :edit %>
+<%= button_to 'Delete Review', @review, :method => :delete %>
+
+<%= link_to 'Home Page', user_path(@user) %>

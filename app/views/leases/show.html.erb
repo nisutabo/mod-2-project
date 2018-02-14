@@ -1,0 +1,24 @@
+<div class="container">
+
+<p class = "padding">
+<label>Property Manager:</label>
+<h1> <%= link_to @lease.building.property_manager.name, property_manager_path(@lease.building.property_manager) %></h1>
+<label>Address:</label>
+<h2><%= @lease.building.address %></h2>
+<label>Tenant:</label>
+<h2><%= @lease.user.name %></h2>
+<label>Monthly Rent:</label>
+<h2>$<%= @lease.rent %></h2>
+<label>Current Lease Status:</label>
+<h2><%= "True" if @lease.current == true %></h2>
+<h2><%= "False" if @lease.current == false %></h2> <hr>
+
+<% if @lease.review %>
+  <h3> <%= link_to 'View Review', review_path(@lease.review) %></h3>
+<% end %>
+
+<%= button_to 'Delete Lease', lease_path(@lease), method: :delete, class: 'btn btn-secondary btn-sm' %><br>
+<%= button_to 'Home Page', user_path(@user), method: :get, class: 'btn btn-info btn-sm' %><br>
+
+
+</div>

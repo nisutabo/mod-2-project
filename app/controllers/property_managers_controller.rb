@@ -8,6 +8,9 @@ class PropertyManagersController < ApplicationController
   def show
   end
 
+
+
+
   private
 
   def retrieve
