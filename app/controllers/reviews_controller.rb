@@ -27,6 +27,7 @@ class ReviewsController < ApplicationController
   end
 
   def show
+    @user = User.find(session[:user_id])
   end
 
   def edit
@@ -38,6 +39,13 @@ class ReviewsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @user = User.find(session[:user_id])
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to user_path(@user)
   end
 
   private

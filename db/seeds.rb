@@ -6,23 +6,23 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# 10.times do
-#   name = Faker::Name.unique.name
-#   date = Faker::Date.birthday(18, 65)
-#   password = Faker::Pokemon.name
-#   User.create(name: name, dob: date, password: password)
-# end
+ 10.times do
+   name = Faker::Name.unique.name
+   date = Faker::Date.birthday(18, 65)
+   password = Faker::Pokemon.name
+   User.create(name: name, dob: date, password: password)
+ end
 
-# 10.times do
-#   name = Faker::Name.unique.name
-#   @propertymanager = PropertyManager.create(name: name)
-#   3.times do
-#     address = Faker::Address.street_address
-#     borough = ["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"].sample
-#     @building = @propertymanager.buildings.build(address: address, borough: borough)
-#     @building.save
-#   end
-# end
+10.times do
+  name = Faker::Name.unique.name
+  @propertymanager = PropertyManager.create(name: name)
+  3.times do
+    address = Faker::Address.street_address
+    borough = ["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"].sample
+    @building = @propertymanager.buildings.build(address: address, borough: borough)
+    @building.save
+  end
+end
 
 User.all.each do |user|
   building = Building.all.sample
