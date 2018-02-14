@@ -1,0 +1,25 @@
+<h1>Add Your lease</h1>
+
+
+<%= form_tag new_lease_path, method: 'get' do  %>
+  <%= label_tag :address %>
+  <%= text_field_tag :address %>
+  <%= label_tag :borough%>
+  <%= text_field_tag :borough %>
+
+
+<% end %>
+
+<%= form_tag new_review_path, method: 'get' do  %>
+<%= label_tag :lease_id, "Choose a lease to write a review" %><br>
+<%= select_tag :lease_id, options_from_collection_for_select(@user.leases, :id, :property_manager_building, selected: params[:lease_id]), {include_blank: "Create new lease"}  %><br>
+<%= submit_tag %>
+<% end %>
+
+
+<%= form_for(@lease) do |f| %>
+  <!-- choose or create building -->
+
+
+
+<% end %>
