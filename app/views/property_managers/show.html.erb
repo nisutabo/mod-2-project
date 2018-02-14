@@ -7,3 +7,37 @@
 </ul>
 
 <h3>Average Rating: <%= @property_manager.average_rating %></h3>
+
+<% if @property_manager.reviews %>
+  <h4>Best Review</h4>
+  <table class="table">
+    <tr>
+      <th>Rating</th>
+      <th>Review</th>
+      <th>Building</th>
+      <th>User Name</th>
+    </tr>
+    <tr>
+      <td><%= @property_manager.best_review.rating %></td>
+      <td><%= @property_manager.best_review.content %></td>
+      <td><%= link_to @property_manager.best_review.lease.building.address, building_path(@property_manager.best_review.lease.building) %></td>
+      <td><%= @property_manager.best_review.lease.user.name %></td>
+    </tr>
+  </table>
+
+  <h4>Worst Review</h4>
+  <table class="table">
+    <tr>
+      <th>Rating</th>
+      <th>Review</th>
+      <th>Building</th>
+      <th>User Name</th>
+    </tr>
+    <tr>
+      <td><%= @property_manager.worst_review.rating %></td>
+      <td><%= @property_manager.worst_review.content %></td>
+      <td><%= link_to @property_manager.worst_review.lease.building.address, building_path(@property_manager.best_review.lease.building) %></td>
+      <td><%= @property_manager.worst_review.lease.user.name %></td>
+    </tr>
+  </table>
+<% end %>

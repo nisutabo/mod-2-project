@@ -1,0 +1,12 @@
+<table class="table">
+  <tr>
+    <th>Address</th>
+    <th>Property Manager</th>
+  </tr>
+  <% @buildings.each do |building| %>
+    <tr>
+      <td><%= link_to building.address, building_path(building) %></td>
+      <td><%= link_to building.property_manager.name, property_manager_path(building.property_manager) %></td>
+    </tr>
+  <% end %>
+</table>

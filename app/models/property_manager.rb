@@ -21,4 +21,22 @@ class PropertyManager < ApplicationRecord
     end
   end
 
+  def best_review
+    max = self.reviews.map do |review|
+      review.rating
+    end.max
+    self.reviews.find do |review|
+      review.rating == max
+    end
+  end
+
+  def worst_review
+    min = self.reviews.map do |review|
+      review.rating
+    end.min
+    self.reviews.find do |review|
+      review.rating == min
+    end
+  end
+
 end
