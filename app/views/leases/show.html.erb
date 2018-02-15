@@ -1,24 +1,47 @@
-<div class="container">
+<div class="wrapper">
 
-<p class = "padding">
-<label>Property Manager:</label>
-<h1> <%= link_to @lease.building.property_manager.name, property_manager_path(@lease.building.property_manager) %></h1>
-<label>Address:</label>
-<h2><%= @lease.building.address %></h2>
-<label>Tenant:</label>
-<h2><%= @lease.user.name %></h2>
-<label>Monthly Rent:</label>
-<h2>$<%= @lease.rent %></h2>
-<label>Current Lease Status:</label>
-<h2><%= "True" if @lease.current == true %></h2>
-<h2><%= "False" if @lease.current == false %></h2> <hr>
+<h1>Lease</h1>
 
-<% if @lease.review %>
-  <h3> <%= link_to 'View Review', review_path(@lease.review) %></h3>
-<% end %>
+<table class="table sm-table">
+  <tr>
+    <th scope="row">Property Manager:</th>
+    <td><h2><%= link_to @lease.building.property_manager.name, property_manager_path(@lease.building.property_manager) %></h2></td>
+  </tr>
+  <tr>
+    <th scope="row">Address:</th>
+    <td><h2><%= @lease.building.address %></h2></td>
+  </tr>
+  <tr>
+    <th scope="row">Tenant:</th>
+    <td><h2><%= @lease.user.name %></h2></td>
+  </tr>
+  <tr>
+    <th scope="row">Monthly Rent:</th>
+    <td><h2>$<%= @lease.rent %></h2></td>
+  </tr>
+  <tr>
+    <th scope="row">Current Lease?</th>
+    <td>
+      <h2><%= "True" if @lease.current == true %>
+      <%= "False" if @lease.current == false %></h2>
+    </td>
+  </tr>
 
-<%= button_to 'Delete Lease', lease_path(@lease), method: :delete, class: 'btn btn-secondary btn-sm' %><br>
-<%= button_to 'Home Page', user_path(@user), method: :get, class: 'btn btn-info btn-sm' %><br>
 
+</table>
+
+
+</div>
+
+<div class="wrapper wrapper-last">
+  <div class="box">
+    <% if @lease.review %>
+      <%= link_to 'View Review', review_path(@lease.review), class:"btn btn-outline-info btn-sm" %>
+    <% else %>
+      <%= link_to 'Write Review', new_review_path, class:"btn btn-outline-info btn-sm" %>
+    <% end %>
+    <%= button_to 'Delete Lease', lease_path(@lease), method: :delete, class:"btn btn-outline-info btn-sm" %>
+    <%= link_to 'Home Page', user_path(@user), method: :get, class:"btn btn-outline-info btn-sm" %>
+  </div>
 
 </div>

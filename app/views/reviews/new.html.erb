@@ -1,24 +1,43 @@
 <h1>Write A Review!</h1>
 
-<% if @review.errors.full_messages %>
-  <% @review.errors.full_messages.each do |error| %>
-    <p><%= error %></p>
+
+<div class="wrapper wrapper-last">
+  <% if @review.errors.full_messages %>
+    <% @review.errors.full_messages.each do |error| %>
+      <p><%= error %></p>
+    <% end %>
   <% end %>
-<% end %>
+
+<div class="sm-form-wrapper">
+  <%= form_for(@review) do |f| %>
+  <div class="form-group">
+    <%= f.label :lease %>
+    <%= f.collection_select :lease_id, @user.leases, :id, :property_manager_building, {}, {class:"form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :response_time %>
+    <%= f.select :response_time, (0..10), {}, {class:"form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :niceness %>
+    <%= f.select :niceness, (0..10), {}, {class:"form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :value %>
+    <%= f.select :value, (0..10), {}, {class:"form-control"}  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :accessibility %>
+    <%= f.select :accessibility, (0..10), {}, {class:"form-control"}  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :content, "Review" %>
+    <%= f.text_area :content, {class:"form-control"}  %>
+  </div>
+
+  <%= f.submit class:"btn btn-primary"%>
+  <% end %>
+</div>
 
 
-<%= form_for(@review) do |f| %>
-<%= f.label :lease %><br>
-<p><%= f.collection_select :lease_id, @user.leases, :id, :property_manager_building %><br></p>
-<%= f.label :response_time %><br>
-<p><%= f.select :response_time, (0..10) %><br></p>
-<%= f.label :niceness %><br>
-<p><%= f.select :niceness, (0..10) %><br></p>
-<%= f.label :value %><br>
-<p><%= f.select :value, (0..10) %><br></p>
-<%= f.label :accessibility %><br>
-<p><%= f.select :accessibility, (0..10) %><br></p>
-<%= f.label :content, "Review" %><br>
-<p><%= f.text_area :content %><br></p>
-<%= f.submit %><br>
-<% end %>
+</div>

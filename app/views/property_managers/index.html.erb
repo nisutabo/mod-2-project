@@ -1,14 +1,20 @@
 <h1>Property Managers</h1>
 
-<table class='table'>
-  <tr>
-    <th>Name</th>
-    <th>Buildings Owned</th>
-  </tr>
-  <% @property_managers.each do |manager| %>
-    <tr>
-      <td><%= link_to manager.name, property_manager_path(manager) %></td>
-      <td><%= manager.buildings.size %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="wrapper">
+  <table class='table table-striped'>
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Buildings Owned</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @property_managers.each do |manager| %>
+        <tr>
+          <td><%= link_to manager.name, property_manager_path(manager) %></td>
+          <td><%= manager.buildings.size %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

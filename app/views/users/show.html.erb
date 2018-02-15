@@ -1,20 +1,49 @@
 <h1>Welcome <%= @user.name %>!</h1>
 
 
+
+<div class="wrapper">
+  <div class="left-col">
+    <h3>Past leases</h3>
+    <% if @user.leases != [] %>
+    <ul>
+      <% @user.leases.each do |lease| %>
+        <li><%= link_to lease.property_manager_building, lease_path(lease) %></li>
+      <% end %>
+    </ul>
+    <% else %>
+      <p>No leases yet!</p>
+    <% end %>
+  </div>
+
+
 <% if @user.current_lease %>
-  <h2>Current Address: <%= @user.current_lease.building.address %></h2>
-  <h2>Borough: <%= @user.current_lease.building.borough %></h2>
-  <h2>Property Manager: <%= @user.property_manager.name %></h2>
-<% end %>
+    <div class="right-col">
+      <h3>Current Lease</h3>
+      <table class="table table-striped">
+        <tr>
+          <th scope="row">Address</th>
+          <td><%= @user.current_lease.building.address %></td>
+        </tr>
+        <tr>
+          <th scope="row">Borough</th>
+          <td><%= @user.current_lease.building.borough %></td>
+        </tr>
+        <tr>
+          <th scope="row">Property Manager</th>
+          <td><%= @user.property_manager.name %></td>
+        </tr>
+      </table>
+    </div>
+    <% end %>
+</div> <!-- end wrapper -->
 
-<h3><%= link_to 'Write A Review', new_review_path %>  </h3>
 
 
-<h3>Past leases</h3>
-<ul>
-  <% @user.leases.each do |lease| %>
-    <li><%= link_to lease.property_manager_building, lease_path(lease) %></li>
-  <% end %>
-</ul>
-
-<h3><%= link_to 'Log Out', '/logout' %>  </h3>
+<div class="wrapper wrapper-last">
+  <div class="box">
+    <%= link_to 'Write Review for Exiting Lease', new_review_path, class:"btn btn-outline-info btn-sm" %>
+    <%= link_to 'Add a New Lease', new_lease_path, class:"btn btn-outline-info btn-sm" %>
+    <%= link_to 'Log Out', '/logout', class:"btn btn-outline-info btn-sm" %>
+  </div>
+</div>

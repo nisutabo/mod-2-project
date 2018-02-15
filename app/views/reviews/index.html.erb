@@ -1,25 +1,27 @@
-
-
-<h1><%= link_to @propertymanager.name, property_manager_path(@propertymanager) %></h1>
-<table class="table">
-  <tr>
-    <th>Niceness</th>
-    <th>Response Time</th>
-    <th>Accessibility</th>
-    <th>Value</th>
-    <th>Review</th>
-    <th>Building</th>
-    <th>User Name</th>
-  </tr>
-  <%  @reviews.each do |review| %>
-  <tr>
-    <td><%= review.niceness %></td>
-    <td><%= review.response_time %></td>
-    <td><%= review.accessibility %></td>
-    <td><%= review.value %></td>
-    <td><%= review.content %></td>
-    <td><%= review.lease.building.address %></td>
-    <td><%= review.lease.user.name %></td>
-  </tr>
-  <% end %>
-</table>
+<div class="wrapper wrapper-last">
+  <h1><%= link_to @propertymanager.name, property_manager_path(@propertymanager) %></h1>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Niceness</th>
+        <th>Response Time</th>
+        <th>Accessibility</th>
+        <th>Value</th>
+        <th>Review</th>
+        <th>Building</th>
+        <th>User Name</th>
+      </tr>
+    </thead>
+    <%  @reviews.each do |review| %>
+    <tr>
+      <td><%= review.niceness %></td>
+      <td><%= review.response_time %></td>
+      <td><%= review.accessibility %></td>
+      <td><%= review.value %></td>
+      <td><%= review.content %></td>
+      <td><%= review.lease.building.address %></td>
+      <td><%= review.lease.user.name %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>

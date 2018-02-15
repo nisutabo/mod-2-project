@@ -1,66 +1,69 @@
-<h1>Add Your lease</h1>
+<div class="wrapper">
+  <h1>Add Your lease</h1>
 
-<%= form_tag new_lease_path, method: 'get' do  %>
-  <div class="form-group">
-    <%= label_tag :address %>
-    <%= text_field_tag :address, params[:address], class:"form-control" %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :borough%>
-    <%= text_field_tag :borough, params[:borough], class:"form-control" %>
-  </div>
-  <% if !params[:address] %>
-    <%= submit_tag "Submit", class:"btn btn-primary" %>
-  <% end %>
-<% end %>
-
-
-
-<% if params[:address] || params[:name] %>
-  <% @building = Building.find_or_create_by(address:params[:address], borough:params[:borough]) %>
-
-  <% if !@building.property_manager #if building has no p manager%>
-
-    <%= form_tag new_lease_path, method: 'get' do %>
-      <br>
-      <%= hidden_field_tag :address, @building.address %>
-      <%= hidden_field_tag :borough, @building.borough %>
-      <div class="form-group">
-        <%= label_tag :name, "Property Manager Name" %>
-        <%= text_field_tag :name, params[:name], class:"form-control" %>
-      </div>
-      <% if !params[:name] %>
-        <%= submit_tag "Submit", class:"btn btn-primary"%>
-      <% end %>
-    <% end #end new pm form %>
-  <% end #end if !@b.pm %>
-
-  <% if params[:name] && @building %>
-    <% @pm = PropertyManager.find_or_create_by(name: params[:name]) %>
-    <% @building.property_manager = @pm %>
-    <% @building.save %>
-  <% end %>
-
-  <br>
-
-  <% if Building.all.include?(@building) %>
-    <%= form_for @lease do |f| %>
-      <%= f.hidden_field :user_id, value: @user.id %>
-      <%= f.hidden_field :building_id, value: @building.id %>
-      <div class="form-group">
-        <%= f.label :rent %><br>
-        <%= f.text_field :rent, class:"form-control" %><br>
-      </div>
-      <div class="form-check">
-        <%= f.check_box :current, class:"form-check-input" %>
-        <%= f.label :current, class:"form-check-label" %>
-      </div>
-      <br>
-      <%= f.submit class:"btn btn-primary" %>
+  <%= form_tag new_lease_path, method: 'get' do  %>
+    <div class="form-group">
+      <%= label_tag :address %>
+      <%= text_field_tag :address, params[:address], class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :borough%>
+      <%= text_field_tag :borough, params[:borough], class:"form-control" %>
+    </div>
+    <% if !params[:address] %>
+      <%= submit_tag "Submit", class:"btn btn-primary" %>
     <% end %>
   <% end %>
 
 
 
+  <% if params[:address] || params[:name] %>
+    <% @building = Building.find_or_create_by(address:params[:address], borough:params[:borough]) %>
 
-<% end # end if params[:address]%>
+    <% if !@building.property_manager #if building has no p manager%>
+
+      <%= form_tag new_lease_path, method: 'get' do %>
+        <br>
+        <%= hidden_field_tag :address, @building.address %>
+        <%= hidden_field_tag :borough, @building.borough %>
+        <div class="form-group">
+          <%= label_tag :name, "Property Manager Name" %>
+          <%= text_field_tag :name, params[:name], class:"form-control" %>
+        </div>
+        <% if !params[:name] %>
+          <%= submit_tag "Submit", class:"btn btn-primary"%>
+        <% end %>
+      <% end #end new pm form %>
+    <% end #end if !@b.pm %>
+
+    <% if params[:name] && @building %>
+      <% @pm = PropertyManager.find_or_create_by(name: params[:name]) %>
+      <% @building.property_manager = @pm %>
+      <% @building.save %>
+    <% end %>
+
+    <br>
+
+    <% if Building.all.include?(@building) %>
+      <%= form_for @lease do |f| %>
+        <%= f.hidden_field :user_id, value: @user.id %>
+        <%= f.hidden_field :building_id, value: @building.id %>
+        <div class="form-group">
+          <%= f.label :rent %><br>
+          <%= f.text_field :rent, class:"form-control" %><br>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :current, class:"form-check-input" %>
+          <%= f.label :current, class:"form-check-label" %>
+        </div>
+        <br>
+        <%= f.submit class:"btn btn-primary" %>
+      <% end %>
+    <% end %>
+
+
+
+
+  <% end # end if params[:address]%>
+
+</div>

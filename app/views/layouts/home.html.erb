@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-<style>
-body, html {
-    height: 100%;
-    margin: 0;
-}
+  <style>
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
 
-body {
-    /* The image used */
-    /* background-image: url("https://cdn.vox-cdn.com/thumbor/wxIQttVMJsQE3zQM17Hfsx4Koj0=/0x0:3000x2000/1200x800/filters:focal(1260x760:1740x1240)/cdn.vox-cdn.com/uploads/chorus_image/image/56255181/nyc_apartment_buildings.0.jpg"); */
-    background-image: url("https://static.pexels.com/photos/9044/pexels-photo.jpg");
-    /* Full height */
-    height: 100%;
+    body {
+      /* The image used */
+      /* background-image: url("https://cdn.vox-cdn.com/thumbor/wxIQttVMJsQE3zQM17Hfsx4Koj0=/0x0:3000x2000/1200x800/filters:focal(1260x760:1740x1240)/cdn.vox-cdn.com/uploads/chorus_image/image/56255181/nyc_apartment_buildings.0.jpg"); */
+      background-image: url("https://static.pexels.com/photos/9044/pexels-photo.jpg");
+      /* Full height */
+      height: 100%;
 
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index:-1;
-}
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index:-1;
+    }
 
-#transparent {
-  opacity:0.4;
-}
+    #transparent {
+      background-color:rgba(255,255,255,0.3);
+      box-shadow:0 1px 10px 2px rgba(0,0,0,0.7);
+    }
+
+    #wrapper {
+      background-color:rgba(255,255,255,0.3);
+      margin:auto;
+      width:50%;
+      padding:50px;
+      margin-top:100px;
+    }
+
+    a {
+      color:white !important;
+      text-shadow:1px 1px 5px rgba(0,0,0,0.7);
+    }
 
 
-</style>
+  </style>
 </head>
 <body>
-  <nav id="transparent" class="navbar navbar-expand-md navbar-light bg-light">
+  <nav id="transparent" class="navbar navbar-expand-lg navbar-light">
     <%= link_to "BORO", root_path, class:"navbar-brand" %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -52,7 +66,7 @@ body {
       </ul>
       <%= form_tag buildings_path, method:'get', class:"form-inline" do %>
         <%= text_field_tag :q, "", class:"form-control mr-sm-2" %>
-        <%= submit_tag "search by address", class:"btn btn-outline-success" %>
+        <%= submit_tag "search by address", class:"btn btn-success" %>
       <% end %>
     </div>
   </nav>
