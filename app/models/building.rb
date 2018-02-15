@@ -6,14 +6,6 @@ class Building < ApplicationRecord
 
 
 
-  def self.does_not_exist?(address, borough)
-    found_by_addr = self.all.find_by(address: address)
-    if !found_by_addr
-      return true
-     else
-       !found_by_addr.borough == borough
-     end
-  end
 
   def reviewed_leases
     self.leases.select{|l|l.review != nil}

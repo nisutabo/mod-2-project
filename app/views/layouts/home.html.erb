@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    /* The image used */
+    /* background-image: url("https://cdn.vox-cdn.com/thumbor/wxIQttVMJsQE3zQM17Hfsx4Koj0=/0x0:3000x2000/1200x800/filters:focal(1260x760:1740x1240)/cdn.vox-cdn.com/uploads/chorus_image/image/56255181/nyc_apartment_buildings.0.jpg"); */
+    background-image: url("https://static.pexels.com/photos/9044/pexels-photo.jpg");
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index:-1;
+}
+
+#transparent {
+  opacity:0.4;
+}
+
+
+</style>
+</head>
+<body>
+  <nav id="transparent" class="navbar navbar-expand-md navbar-light bg-light">
+    <%= link_to "BORO", root_path, class:"navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item px-2"><%= link_to "Home", root_path, class:"nav-link" %></li>
+        <li class="nav-item px-2"><%= link_to "Property Managers", property_managers_path, class:"nav-link" %></li>
+        <% if !session[:user_id] %>
+          <li class="nav-item px-2"><%= link_to "Sign Up", new_user_path, class:"nav-link" %></li>
+          <li class="nav-item px-2"><%= link_to "Log In", login_path, class:"nav-link" %></li>
+        <% elsif session[:user_id]%>
+          <li class="nav-item px-2"><%= link_to "Log Out", logout_path, class:"nav-link" %></li>
+          <li class="nav-item px-2"><%= link_to "Review", new_review_path, class:"nav-link" %></li>
+          <li class="nav-item px-2"><%= link_to User.find(session[:user_id]).name, user_path(session[:user_id]), class:"nav-link" %></li>
+        <% end %>
+      </ul>
+      <%= form_tag buildings_path, method:'get', class:"form-inline" do %>
+        <%= text_field_tag :q, "", class:"form-control mr-sm-2" %>
+        <%= submit_tag "search by address", class:"btn btn-outline-success" %>
+      <% end %>
+    </div>
+  </nav>
+
+
+
+<%= yield %>
+
+
+</body>
+</html>
