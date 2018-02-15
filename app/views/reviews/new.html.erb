@@ -6,70 +6,19 @@
   <% end %>
 <% end %>
 
-<%= form_tag new_review_path, method: 'get' do  %>
-  <%= label_tag :lease_id, "Choose a lease to write a review" %><br>
-  <%= select_tag :lease_id, options_from_collection_for_select(@user.leases, :id, :property_manager_building, selected: params[:lease_id]), {include_blank: "Create new lease"}  %><br></br>
-  <%= submit_tag %>
-<% end %>
 
-<br>
-
-<% if params[:lease_id] && params[:lease_id] == "" %>
-  <%= form_tag new_review_path, method: 'get', html: {autocomplete:"on"} do  %>
-    <%= label_tag :address %><br>
-    <%= text_field_tag :address %><br>
-    <%= label_tag :borough %><br>
-    <%= select_tag :borough, options_for_select(["Manhattan", "Queens", "Brooklyn", "Bronx", "Staten Island"]) %><br>
-    <br>
-    <%= submit_tag %>
-  <% end %>
-<% end %>
-
-
-
-<% if params[:address] && Building.does_not_exist?(params[:address], params[:borough]) %>
-
-
-  <%= form_for(@review) do |f| %><br>
-
-  <% if params[:lease_id] == "" %>
-  <%= f.label :property_manager_id, "Select or create new lease" %><br>
-    <%= f.fields_for :lease do |lease| %>
-      <%= lease.label :rent %><br>
-      <%= lease.text_field :rent %><br>
-      <%= lease.label :current, "Current lease?" %><br>
-      <%= lease.check_box :current %><br>
-      <%= lease.hidden_field :user_id, value: session[:user_id] %>
-      <%= lease.label :property_manager %><br>
-      <%= lease.fields_for :property_manager do |pm| %>
-        <%= pm.label :name %><br>
-        <%= pm.text_field :name, list: 'pm_autocomplete' %><br>
-          <datalist id='pm_autocomplete'>
-            <% PropertyManager.all.each do |pm| %>
-              <option value="<%= pm.name %>"></option>
-            <% end %>
-          </datalist>
-        <% end %>
-      <% end %>
-    <hr>
-  <% else %>
-    <%= f.hidden_field :lease_id, value: params[:lease_id] %>
-  <% end %>
-
-  <br>
-  <hr>
-  <% if params[:lease_id] && params[:address]%>
-    <%= f.label :response_time %><br>
-    <%= f.select :response_time, (0..10) %><br>
-    <%= f.label :niceness %><br>
-    <%= f.select :niceness, (0..10) %><br>
-    <%= f.label :value %><br>
-    <%= f.select :value, (0..10) %><br>
-    <%= f.label :accessibility %><br>
-    <%= f.select :accessibility, (0..10) %><br>
-    <%= f.label :content, "Review" %><br>
-    <%= f.text_area :content %><br>
-    <%= f.submit %><br>
-  <% end %>
-<% end %>
+<%= form_for(@review) do |f| %>
+<%= f.label :lease %><br>
+<p><%= f.collection_select :lease_id, @user.leases, :id, :property_manager_building %><br></p>
+<%= f.label :response_time %><br>
+<p><%= f.select :response_time, (0..10) %><br></p>
+<%= f.label :niceness %><br>
+<p><%= f.select :niceness, (0..10) %><br></p>
+<%= f.label :value %><br>
+<p><%= f.select :value, (0..10) %><br></p>
+<%= f.label :accessibility %><br>
+<p><%= f.select :accessibility, (0..10) %><br></p>
+<%= f.label :content, "Review" %><br>
+<p><%= f.text_area :content %><br></p>
+<%= f.submit %><br>
 <% end %>

@@ -5,7 +5,6 @@ class Review < ApplicationRecord
 
   validates :response_time, :niceness, :value, :accessibility, :content, presence: true
 
-  validate :owner_matches_building
 
 
   def lease_attributes=(att)

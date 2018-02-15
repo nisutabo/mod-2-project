@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   root 'application#home'
+  get '/about', to: 'application#about', as: :about
 
   delete '/reviews/:id', to: 'reviews#destroy', as: :delete_review
 

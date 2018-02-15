@@ -58,11 +58,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    if !params[:review][:lease_id]
-      params.require(:review).permit(:response_time, :niceness, :value, :accessibility, :content, lease_attributes: [:rent, :current, :user_id, building_attributes: [:address, :borough, property_manager_attributes: [:name]]])
-    else
       params.require(:review).permit(:lease_id, :response_time, :niceness, :value, :accessibility, :content)
-    end
   end
 
 
