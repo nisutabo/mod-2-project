@@ -1,25 +1,42 @@
-<h1>Your Review</h1>
+<div class="wrapper wrapper-last">
+  <h1>Your Review</h1>
 
-<label> Niceness Rating: </label><br>
-<h2><%= @review.niceness %></h2>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Category</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tr>
+      <th scope="row">Niceness</th>
+      <td><%= @review.niceness %></td>
+    </tr>
+    <tr>
+      <th scope="row">Value</th>
+      <td><%= @review.value %></td>
+    </tr>
+    <tr>
+      <th scope="row">Response Time</th>
+      <td><%= @review.response_time %></td>
+    </tr>
+    <tr>
+      <th scope="row">Accessibility</th>
+      <td><%= @review.accessibility %></td>
+    </tr>
+    <tr>
+      <th scope="row">Overall</th>
+      <td><%= @review.rating %></td>
+    </tr>
+  </table>
 
-<label> Response Time Rating: </label><br>
-<h2><%= @review.response_time %></h2>
+  <h4>Review:</h4>
 
-<label> Accessibility Rating: </label><br>
-<h2><%= @review.accessibility %></h2>
+  <p><%= @review.content %></p>
 
-<label> Value: </label><br>
-<h2><%= @review.value %></h2>
-
-<label> Overall Rating: </label><br>
-<h2><%= @review.rating %></h2>
-
-<label> Review: </label>
-<h2><%= @review.content %></h2>
-
-<%= link_to 'Edit Review', edit_review_path %>
-<%= button_to 'Edit Review', @review, :method => :edit %>
-<%= button_to 'Delete Review', @review, :method => :delete %>
-
-<%= link_to 'Home Page', user_path(@user) %>
+  <div class="box">
+    <%= link_to 'Edit Review', edit_review_path, class:"btn btn-sm btn-outline-info" %>
+    <%= button_to 'Delete Review', @review, method: :delete, class:"btn btn-sm btn-outline-info" %>
+    <%= link_to 'Home Page', user_path(@user), class:"btn btn-sm btn-outline-info" %>
+  </div>
+</div>

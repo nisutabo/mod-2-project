@@ -1,26 +1,39 @@
-<h1>Edit Your Review</h1>
+<div class="wrapper wrapper-last">
 
+  <h1> Review for <%= @review.lease.property_manager_building %></h1>
 
-
-<h2> Review for <%= @review.lease.property_manager_building %></h2>
-
-<% if @review.errors.full_messages %>
-  <% @review.errors.full_messages.each do |error| %>
-    <p><%= error %></p>
+  <% if @review.errors.full_messages %>
+    <% @review.errors.full_messages.each do |error| %>
+      <p><%= error %></p>
+    <% end %>
   <% end %>
-<% end %>
 
-<%= form_for(@review) do |f| %><br>
-  <%= f.label :response_time %><br>
-  <%= f.select :response_time, (0..10) %><br>
-  <%= f.label :niceness %><br>
-  <%= f.select :niceness, (0..10) %><br>
-  <%= f.label :value %><br>
-  <%= f.select :value, (0..10) %><br>
-  <%= f.label :accessibility %><br>
-  <%= f.select :accessibility, (0..10) %><br>
-  <%= f.label :content, "Review" %><br>
-  <%= f.text_area :content %><br>
-  <%= f.hidden_field :lease_id, default: @review.lease_id %><br>
-  <%= f.submit %><br>
-<% end %>
+  <div class="sm-form-wrapper">
+    <%= form_for(@review) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :response_time %>
+      <%= f.select :response_time, (0..10), {}, {class:"form-control"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :niceness %>
+      <%= f.select :niceness, (0..10), {}, {class:"form-control"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :value %>
+      <%= f.select :value, (0..10), {}, {class:"form-control"}  %>
+    </div>
+    <div class="form-group">
+      <%= f.label :accessibility %>
+      <%= f.select :accessibility, (0..10), {}, {class:"form-control"}  %>
+    </div>
+    <div class="form-group">
+      <%= f.label :content, "Review" %>
+      <%= f.text_area :content, {class:"form-control"}  %>
+    </div>
+
+    <%= f.submit class:"btn btn-primary"%>
+    <% end %>
+  </div>
+
+</div>

@@ -1,8 +1,12 @@
-<table class="table">
-  <tr>
-    <th>Address</th>
-    <th>Property Manager</th>
-  </tr>
+<h1>Building Results</h1>
+
+<table class='table table-striped'>
+  <thead class="thead-dark">
+    <tr>
+      <th>Address</th>
+      <th>Property Manager</th>
+    </tr>
+  </thead>
   <% @buildings.each do |building| %>
     <tr>
       <td><%= link_to building.address, building_path(building) %></td>

@@ -3,14 +3,20 @@
 <% if flash[:message] %>
   <p><%= flash[:message] %></p>
 <% end %>
+<div class="wrapper">
+  <div id="login-section" class="sm-form-wrapper">
+    <h2>Log In</h2>
+    <%= form_tag '/login' do %>
+    <div class="form-group">
+      <label for="Name">Name:</label><br>
+      <%= text_field_tag :name, "", class:"form-control" %> <br>
+    </div>
+    <div class="form-group">
+      <label for="Password">Password:</label><br>
+      <%= password_field_tag :password, "", class:"form-control" %><br>
+    </div>
 
-<div id="login-section" class="container">
-  <h2>Log In</h2>
-  <%= form_tag '/login' do %>
-  <label for="Name">Name:</label><br>
-  <%= text_field_tag :name %> <br>
-  <label for="Password">Password:</label><br>
-  <%= password_field_tag :password %><br>
-  <%= submit_tag 'Login' %>
-  <% end %>
+    <%= submit_tag 'Login', class:"btn btn-primary" %>
+    <% end %>
+  </div>
 </div>

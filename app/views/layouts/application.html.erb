@@ -6,14 +6,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <style>
-    p.padding {
-        padding-top: 2cm
+
+
+    body {
+
     }
+
+    #transparent {
+      background-color:rgba(132,163,178,0.4);
+    }
+
+    h1 {
+      margin:auto;
+      padding:30px;
+      font-size:30px;
+      text-align:center;
+      padding-top:50px;
+    }
+
+
+    h2 {
+      font-size:28px;
+    }
+
+    .bold {
+      font-weight: bold;
+      font-size:16px;
+    }
+
+    .left-col {
+      width:50%;
+      float:left;
+    }
+
+    .right-col {
+      width:50%;
+      float:left;
+    }
+
+    .wrapper {
+      width:90%;
+      display:block;
+      float:left;
+      margin-left:5%;
+    }
+
+    .wrapper-two {
+
+    }
+
+    .wrapper-last {
+      padding-bottom:100px;
+    }
+
+    .right {
+      text-align:right;
+    }
+
+    ul {
+      list-style-type:square;
+      line-height: 2em;
+      margin-top:0px;
+    }
+
+
+    .extra-space {
+      width:10rem;
+      display:block;
+      margin:auto;
+      margin-top:30px;
+    }
+
+    .back-button {
+      position:absolute;
+      top:80px;
+      left:0px;
+      padding:10px;
+    }
+
+    h1 a {
+      color:rgba(47,73,115,1)
+    }
+
+    h1 a:hover {
+      color:rgba(47,73,115,1);
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    .align-right {
+      position:absolute;
+      right:0;
+    }
+
+
+    table a, .box ul a {
+      color:rgba(47,73,115, 0.8);
+      padding:0;
+      border-bottom:1px dashed rgba(47,73,115, 0.7) !important;
+      padding-top:4px;
+    }
+
+    table a:hover, .box ul a:hover {
+      text-decoration:none;
+      letter-spacing:normal;
+      border-bottom: 1px solid rgb(47,73,115) !important;
+    }
+
+    nav a {
+      border:none;
+    }
+
+    nav a:hover {
+      border:none;
+    }
+
+    .sm-form-wrapper {
+      width:50%;
+      min-width: 300px;
+      margin:auto;
+    }
+
+    .box {
+      float:right;
+    }
+
+    .box .btn {
+      margin:7px;
+    }
+
+    .box form.button_to {
+      display:inline-block;
+    }
+
+    table.sm-table {
+      width:50%;
+      min-width: 200px;
+      border:none;
+    }
+
+    .sm-table td, .sm-table th {
+      border:none;
+    }
+
+    .sm-table h2 {
+      font-size:24px;
+    }
+
+
+
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav id="transparent" class="navbar navbar-expand-lg navbar-light">
       <%= link_to "BORO", root_path, class:"navbar-brand" %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,16 +183,14 @@
         </ul>
         <%= form_tag buildings_path, method:'get', class:"form-inline" do %>
           <%= text_field_tag :q, "", class:"form-control mr-sm-2" %>
-          <%= submit_tag "search by address", class:"btn btn-outline-success" %>
+          <%= submit_tag "search by address", class:"btn btn-success" %>
         <% end %>
       </div>
     </nav>
-    <div class="container">
+
+
       <%= yield %>
-    </div>
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 
   </body>
