@@ -15,6 +15,18 @@ class Building < ApplicationRecord
      end
   end
 
+  def reviewed_leases
+    self.leases.select{|l|l.review != nil}
+  end
+
+  def rating
+    self.reviewed_leases.map{|l| l.rating}.inject(:+) / self.reviewed_leases.size
+  end
+
+
+
+
+
   private
 
 end

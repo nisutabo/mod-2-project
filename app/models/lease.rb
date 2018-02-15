@@ -11,4 +11,8 @@ class Lease < ApplicationRecord
   def property_manager_building
     "#{get_property_manager} - #{self.building.address}"
   end
+
+  def rating
+    (self.review["niceness"] + self.review["value"] + self.review["accessibility"] + self.review["response_time"])/4.0
+  end
 end

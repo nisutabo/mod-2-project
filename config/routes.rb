@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   root 'application#home'
   get '/about', to: 'application#about', as: :about
+  get '/statistics', to:'application#statistics',as: :statistics
 
   delete '/reviews/:id', to: 'reviews#destroy', as: :delete_review
 

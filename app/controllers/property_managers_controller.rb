@@ -8,6 +8,8 @@ class PropertyManagersController < ApplicationController
   def show
   end
 
+  
+
 
 
 
