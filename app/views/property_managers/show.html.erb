@@ -1,5 +1,7 @@
 <h1><%= @property_manager.name %></h1><br>
-<h2>Average Monthly Rent: $<%= @property_manager.average_rent %></h2><br>
+<% if @property_manager.reviews %>
+  <h2>Average Monthly Rent: $<%= @property_manager.average_rent %></h2><br>
+<% end %>
 
 <ul>
   <% @property_manager.buildings.each do |building| %>
@@ -7,10 +9,11 @@
   <% end %>
 </ul>
 
-<p>Number of Reviews: <%= @property_manager.reviews.size %></p>
+
 
 <h4>Average Ratings</h4>
 <% if @property_manager.reviews %>
+<p>Number of Reviews: <%= @property_manager.reviews.size %></p>
 <table class="table">
   <tr>
     <th>Niceness</th>
@@ -60,6 +63,8 @@
       <td><%= @property_manager.worst_review.lease.user.name %></td>
     </tr>
   </table>
-<% end %>
 
-<%= link_to "See All Reviews", property_manager_reviews_path(@property_manager) %>
+  <%= link_to "See All Reviews", property_manager_reviews_path(@property_manager) %>
+<% else %>
+  <p>No reviews yet!</p>
+<% end %>
