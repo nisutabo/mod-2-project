@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
 
   def home
 
-  #  render :layout => "home"
+    render :layout => "home"
   end
 
   def statistics
-    
+
   end
 
 

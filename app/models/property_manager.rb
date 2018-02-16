@@ -19,21 +19,24 @@ class PropertyManager < ApplicationRecord
   def self.highest_rated
     value = 0
     highestrated = ''
-    PropertyManager.all.each{|pm| value = pm.overall and highestrated = "#{pm.name} - #{pm.overall}" if pm.overall > value}
+    with_reviews = PropertyManager.all.select{|pm| pm.reviews}
+    with_reviews.each{|pm| value = pm.overall and highestrated = "#{pm.name} - #{pm.overall}" if pm.overall > value}
     highestrated
   end
 
   def self.lowest_rated
     value = 10
     lowestrated = ''
-    PropertyManager.all.each{|pm| value = pm.overall and lowestrated = "#{pm.name} - #{pm.overall}" if pm.overall < value}
+    with_reviews = PropertyManager.all.select{|pm| pm.reviews}
+    with_reviews.each{|pm| value = pm.overall and lowestrated = "#{pm.name} - #{pm.overall}" if pm.overall < value}
     lowestrated
   end
 
   def self.most_leases
     count = 0
     most = ''
-    PropertyManager.all.each{|pm| count = pm.leases.size and most = "#{pm.name} - #{pm.leases.size}" if pm.leases.size > count}
+    with_reviews = PropertyManager.all.select{|pm| pm.reviews}
+    with_reviews.each{|pm| count = pm.leases.size and most = "#{pm.name} - #{pm.leases.size}" if pm.leases.size > count}
     most
   end
 
