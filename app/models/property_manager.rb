@@ -16,24 +16,30 @@ class PropertyManager < ApplicationRecord
     self.buildings.map{|b| b.leases}.flatten
   end
 
+  def self.get_link(return_text)
+    name = return_text.split(" - ").first
+    PropertyManager.all.find_by(name:name)
+  end
+
+
   def self.highest_rated
     value = 0
     highestrated = ''
-    PropertyManager.all.each{|pm| value = pm.overall and highestrated = "#{pm.name} - #{pm.overall}" if pm.overall > value}
+    self.rated_property_managers.each{|pm| value = pm.overall and highestrated = "#{pm.name} - #{pm.overall}" if pm.overall > value}
     highestrated
   end
 
   def self.lowest_rated
     value = 10
     lowestrated = ''
-    PropertyManager.all.each{|pm| value = pm.overall and lowestrated = "#{pm.name} - #{pm.overall}" if pm.overall < value}
+    self.rated_property_managers.each{|pm| value = pm.overall and lowestrated = "#{pm.name} - #{pm.overall}" if pm.overall < value}
     lowestrated
   end
 
   def self.most_leases
     count = 0
     most = ''
-    PropertyManager.all.each{|pm| count = pm.leases.size and most = "#{pm.name} - #{pm.leases.size}" if pm.leases.size > count}
+    self.rated_property_managers.each{|pm| count = pm.leases.size and most = "#{pm.name} - #{pm.leases.size}" if pm.leases.size > count}
     most
   end
 
@@ -44,13 +50,12 @@ class PropertyManager < ApplicationRecord
 
   def overall
       (self.average("niceness") + self.average("value") + self.average("accessibility") + self.average("response_time")) / 4.0
-    
   end
 
   def self.highest(att)
     num = 0
     highest = ''
-    PropertyManager.all.each{|pm| num = pm.average(att) and highest = "#{pm.name} - #{pm.average(att)}"  if pm.average(att) > num}
+    self.rated_property_managers.each{|pm| num = pm.average(att) and highest = "#{pm.name} - #{pm.average(att)}"  if pm.average(att) > num}
     highest
   end
 
@@ -131,7 +136,7 @@ class PropertyManager < ApplicationRecord
     max = 0
     highest = ''
 
-    PropertyManager.all.each{|pm|
+    self.rated_property_managers.each{|pm|
       if pm.has_manhattan?
        max = pm.manhattan_rating and highest = "#{pm.name} - #{pm.manhattan_rating}" if pm.manhattan_rating > max
       end
@@ -143,7 +148,7 @@ class PropertyManager < ApplicationRecord
     max = 0
     highest = ''
 
-    PropertyManager.all.each{|pm|
+    self.rated_property_managers.each{|pm|
       if pm.has_brooklyn?
        max = pm.brooklyn_rating and highest = "#{pm.name} - #{pm.brooklyn_rating}" if pm.brooklyn_rating > max
       end
@@ -155,7 +160,7 @@ class PropertyManager < ApplicationRecord
     max = 0
     highest = ''
 
-    PropertyManager.all.each{|pm|
+    self.rated_property_managers.each{|pm|
       if pm.has_queens?
        max = pm.queens_rating and highest = "#{pm.name} - #{pm.queens_rating}" if pm.queens_rating > max
       end
@@ -167,7 +172,7 @@ class PropertyManager < ApplicationRecord
     max = 0
     highest = ''
 
-    PropertyManager.all.each{|pm|
+    self.rated_property_managers.each{|pm|
       if pm.has_si?
        max = pm.si_rating and highest = "#{pm.name} - #{pm.si_rating}" if pm.si_rating > max
       end
@@ -184,6 +189,12 @@ class PropertyManager < ApplicationRecord
       review.rating == min
     end
   end
+
+  def self.rated_property_managers
+    PropertyManager.all.select {|pm| pm.reviews}
+  end
+
+
 
 
 end
