@@ -46,7 +46,8 @@ class PropertyManager < ApplicationRecord
   end
 
   def overall
-    (self.average("niceness") + self.average("value") + self.average("accessibility") + self.average("response_time")) / 4.0
+      (self.average("niceness") + self.average("value") + self.average("accessibility") + self.average("response_time")) / 4.0
+    
   end
 
   def self.highest(att)

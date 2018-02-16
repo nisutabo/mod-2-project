@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
   end
 
   def home
-
-    render :layout => "home"
+   render :layout => "home"
   end
 
   def statistics
