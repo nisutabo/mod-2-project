@@ -20,6 +20,10 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'faker'
 
+gem 'rspec'
+
+gem 'rspec-expectations'
+
 gem 'bootstrap'
 
 # Use CoffeeScript for .coffee assets and views
